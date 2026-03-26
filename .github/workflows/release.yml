@@ -1,15 +1,12 @@
-name: Deploy to Production
+name: Deploy to Firebase
 
 on:
   push:
     branches:
       - main
-      
-permissions:
-  contents: write
 
 jobs:
-  build-and-release:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +22,7 @@ jobs:
         run: npm install
 
       - name: Build app
-        run: npm run build
+        run: npm run build-prod
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
@@ -35,3 +32,9 @@ jobs:
           body: "Automated release from GitHub Actions"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy to Firebase
+        run: |
+          echo ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }} | base64 -d > service-account.json
+          export GOOGLE_APPLICATION_CREDENTIALS=service-account.json
+          npx firebase deploy --only hosting
