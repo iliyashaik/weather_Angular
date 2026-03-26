@@ -29,19 +29,6 @@ ng serve
 
 Navigate to `http://localhost:4200/`
 
-## Adding Weather Characters
-
-Place GIF or PNG images in `src/assets/` with these names:
-
-| Weather | Filename |
-|---|---|
-| Rain / Drizzle | `rain-character.gif` |
-| Snow | `snow-character.gif` |
-| Clouds | `cloud-character.gif` |
-| Clear (day) | `sunny-character.gif` |
-| Clear (night) | `night-character.gif` |
-| Mist / Fog | `fog-character.gif` |
-
 ## Build & Deploy
 
 ```bash
